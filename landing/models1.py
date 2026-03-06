@@ -50,20 +50,20 @@ class SiteSettings(SingletonModel):
 
 class HeroSection(SingletonModel):
     title = models.CharField(
-        max_length=120, default='Допоможемо швидко та вигідно продати земельну ділянку чи пай в Україні',
+        max_length=120, default='Заголовок вашого лендінгу',
         verbose_name='Заголовок'
     )
     subtitle = models.TextField(
-        default='Повний юридичний супровід, пошук покупців та оцінка вартості. Працюємо з усіми типами землі.',
+        default='Короткий опис вашої основної пропозиції або переваги.',
         verbose_name='Підзаголовок'
     )
     btn_buy_text = models.CharField(
-        max_length=60, default='Отримати безкоштовну консультацію',
-        verbose_name='Кнопка «Купити»'
+        max_length=60, default='Дізнатися більше',
+        verbose_name='Текст кнопки 1'
     )
     btn_sell_text = models.CharField(
-        max_length=60, default='Дізнатися вартість моєї землі',
-        verbose_name='Кнопка «Продати»'
+        max_length=60, default='Зв\'язатися з нами',
+        verbose_name='Текст кнопки 2'
     )
     bg_image = models.ImageField(
         upload_to='hero/', blank=True, null=True,
@@ -84,62 +84,31 @@ class HeroSection(SingletonModel):
 
 class AboutSection(SingletonModel):
     title = models.CharField(
-        max_length=120, default='Про компанію',
+        max_length=120, default='Про нас',
         verbose_name='Заголовок секції'
     )
     philosophy_title = models.CharField(
         max_length=160,
-        default='Наша філософія: Справедлива ціна народжується в конкуренції',
-        verbose_name='Заголовок філософії'
+        default='Наша філософія та підхід',
+        verbose_name='Заголовок підблоку'
     )
     philosophy_text = models.TextField(
-        verbose_name='Текст філософії'
+        verbose_name='Текст опису',
+        default='Тут ви можете описати вашу компанію, місію та цінності.'
     )
 
     class Meta:
-        verbose_name = 'Секція «Про компанію»'
-        verbose_name_plural = 'Секція «Про компанію»'
+        verbose_name = 'Секція «Про нас»'
+        verbose_name_plural = 'Секція «Про нас»'
 
     def __str__(self):
-        return 'Про компанію'
-
-
-class AuctionSection(SingletonModel):
-    title = models.CharField(
-        max_length=120, default='Що таке аукціон?',
-        verbose_name='Заголовок секції'
-    )
-    platform_title = models.CharField(
-        max_length=120, default='Що таке Prozorro.Продажі?',
-        verbose_name='Заголовок платформи'
-    )
-    platform_text = models.TextField(verbose_name='Опис платформи')
-    seller_title = models.CharField(
-        max_length=80, default='Для власника (Продавця)',
-        verbose_name='Заголовок блоку продавця'
-    )
-    seller_text = models.TextField(verbose_name='Текст для продавця')
-    buyer_title = models.CharField(
-        max_length=80, default='Для фермера (Покупця)',
-        verbose_name='Заголовок блоку покупця'
-    )
-    buyer_text = models.TextField(verbose_name='Текст для покупця')
-    important_note = models.TextField(
-        verbose_name='Важлива примітка (виноска)'
-    )
-
-    class Meta:
-        verbose_name = 'Секція «Що таке аукціон»'
-        verbose_name_plural = 'Секція «Що таке аукціон»'
-
-    def __str__(self):
-        return 'Що таке аукціон'
+        return 'Про нас'
 
 
 class ServiceItem(models.Model):
     CATEGORY_CHOICES = [
-        ('buyer', 'Для покупців'),
-        ('seller', 'Для продавців'),
+        ('cat1', 'Категорія 1'),
+        ('cat2', 'Категорія 2'),
     ]
     category = models.CharField(
         max_length=10, choices=CATEGORY_CHOICES,
@@ -152,7 +121,7 @@ class ServiceItem(models.Model):
     class Meta:
         ordering = ['category', 'order']
         verbose_name = 'Послуга'
-        verbose_name_plural = 'Наші послуги'
+        verbose_name_plural = 'Послуги'
 
     def __str__(self):
         return f'{self.get_category_display()} — {self.title}'

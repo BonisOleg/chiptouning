@@ -2,7 +2,7 @@ from django.contrib import admin
 from .admin1 import SingletonAdmin
 from .models2 import (
     WorkStep, StatItem, AdvantageItem, AdvantagesSection,
-    ServicesSection, ContactSection, LeadSubmission,
+    ServicesSection, ContactSection, FAQSection, FAQItem, LeadSubmission,
 )
 
 
@@ -52,6 +52,22 @@ class ContactSectionAdmin(SingletonAdmin):
             'fields': ('title', 'description', 'form_title', 'form_btn_text', 'privacy_note'),
         }),
     )
+
+
+@admin.register(FAQSection)
+class FAQSectionAdmin(SingletonAdmin):
+    fieldsets = (
+        ('Секція FAQ', {
+            'fields': ('title',),
+        }),
+    )
+
+
+@admin.register(FAQItem)
+class FAQItemAdmin(admin.ModelAdmin):
+    list_display = ('question', 'order')
+    list_editable = ('order',)
+    ordering = ('order',)
 
 
 @admin.register(LeadSubmission)

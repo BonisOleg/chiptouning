@@ -1,29 +1,30 @@
-<section class="section section--cream" id="services" aria-label="Наші послуги">
+<section class="section section--cream" id="services" aria-label="{{ services_section.title }}">
   <div class="container">
     <span class="section-label">Послуги</span>
+    <h2 class="section-title">{{ services_section.title }}</h2>
 
     <div class="services__tabs" role="tablist" aria-label="Категорії послуг">
       <button
         class="services__tab active"
         role="tab"
         aria-selected="true"
-        aria-controls="panel-sellers"
-        id="tab-sellers"
-        data-tab="sellers"
-      >Для продавців</button>
+        aria-controls="panel-cat1"
+        id="tab-cat1"
+        data-tab="cat1"
+      >Категорія 1</button>
       <button
         class="services__tab"
         role="tab"
         aria-selected="false"
-        aria-controls="panel-buyers"
-        id="tab-buyers"
-        data-tab="buyers"
-      >Для покупців</button>
+        aria-controls="panel-cat2"
+        id="tab-cat2"
+        data-tab="cat2"
+      >Категорія 2</button>
     </div>
 
-    <div class="services__panel active" id="panel-sellers" role="tabpanel" aria-labelledby="tab-sellers">
+    <div class="services__panel active" id="panel-cat1" role="tabpanel" aria-labelledby="tab-cat1">
       <div class="services__grid">
-        {% for item in service_sellers %}
+        {% for item in service_cat1 %}
         <div class="service-card js-reveal">
           <span class="service-card__num" aria-hidden="true">{{ forloop.counter }}</span>
           <div class="service-card__body">
@@ -35,9 +36,9 @@
       </div>
     </div>
 
-    <div class="services__panel" id="panel-buyers" role="tabpanel" aria-labelledby="tab-buyers">
+    <div class="services__panel" id="panel-cat2" role="tabpanel" aria-labelledby="tab-cat2">
       <div class="services__grid">
-        {% for item in service_buyers %}
+        {% for item in service_cat2 %}
         <div class="service-card js-reveal">
           <span class="service-card__num" aria-hidden="true">{{ forloop.counter }}</span>
           <div class="service-card__body">

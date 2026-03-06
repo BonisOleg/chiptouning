@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models1 import SiteSettings, HeroSection, AboutSection, AuctionSection, ServiceItem
+from .models1 import SiteSettings, HeroSection, AboutSection, ServiceItem
 
 
 class SingletonAdmin(admin.ModelAdmin):
@@ -62,26 +62,8 @@ class HeroSectionAdmin(SingletonAdmin):
 @admin.register(AboutSection)
 class AboutSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція «Про компанію»', {
+        ('Секція «Про нас»', {
             'fields': ('title', 'philosophy_title', 'philosophy_text'),
-        }),
-    )
-
-
-@admin.register(AuctionSection)
-class AuctionSectionAdmin(SingletonAdmin):
-    fieldsets = (
-        ('Загальне', {
-            'fields': ('title', 'platform_title', 'platform_text'),
-        }),
-        ('Для продавця', {
-            'fields': ('seller_title', 'seller_text'),
-        }),
-        ('Для покупця', {
-            'fields': ('buyer_title', 'buyer_text'),
-        }),
-        ('Важлива примітка', {
-            'fields': ('important_note',),
         }),
     )
 

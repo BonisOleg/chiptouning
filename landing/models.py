@@ -3,7 +3,6 @@ from .models1 import (
     SiteSettings,
     HeroSection,
     AboutSection,
-    AuctionSection,
     ServiceItem,
 )
 from .models2 import (
@@ -13,6 +12,8 @@ from .models2 import (
     AdvantagesSection,
     ServicesSection,
     ContactSection,
+    FAQSection,
+    FAQItem,
     LeadSubmission,
 )
 
@@ -21,7 +22,6 @@ __all__ = [
     'SiteSettings',
     'HeroSection',
     'AboutSection',
-    'AuctionSection',
     'ServiceItem',
     'WorkStep',
     'StatItem',
@@ -29,5 +29,7 @@ __all__ = [
     'AdvantagesSection',
     'ServicesSection',
     'ContactSection',
+    'FAQSection',
+    'FAQItem',
     'LeadSubmission',
 ]
