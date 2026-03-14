@@ -2,9 +2,10 @@ services:
   - type: web
     name: distage-landing
     runtime: python
+    plan: starter
     buildCommand: ./build.sh
+    preDeployCommand: python manage.py migrate --no-input
     startCommand: ./start.sh
-    port: 10000
     healthCheckPath: /healthz
     envVars:
       - key: DATABASE_URL
@@ -28,4 +29,3 @@ databases:
   - name: distage-db
     databaseName: distage_db
     user: distage_user
-    plan: free
