@@ -1,14 +1,14 @@
 /* ============================================
-   main.js — Mobile menu, scroll, animations
-   No conflicts with HTMX (separate concerns)
+   main.js — Mobile menu, scroll, animations,
+   services tabs, FAQ, HTMX, modal
    ============================================ */
 
 (function () {
   'use strict';
 
   /* ── Mobile menu ── */
-  const burger = document.getElementById('burger-btn');
-  const mobileNav = document.getElementById('mobile-nav');
+  var burger = document.querySelector('.header__burger');
+  var mobileNav = document.getElementById('mobile-nav');
 
   function toggleNav(open) {
     if (!burger || !mobileNav) return;
@@ -19,17 +19,15 @@
 
   if (burger) {
     burger.addEventListener('click', function () {
-      const isOpen = burger.getAttribute('aria-expanded') === 'true';
+      var isOpen = burger.getAttribute('aria-expanded') === 'true';
       toggleNav(!isOpen);
     });
   }
 
-  /* Close on nav link tap */
   document.querySelectorAll('[data-close-nav]').forEach(function (el) {
     el.addEventListener('click', function () { toggleNav(false); });
   });
 
-  /* Close on outside tap */
   document.addEventListener('click', function (e) {
     if (
       mobileNav &&
@@ -43,7 +41,7 @@
   });
 
   /* ── Header scroll shadow ── */
-  var header = document.getElementById('site-header');
+  var header = document.getElementById('header');
   if (header) {
     var onScroll = function () {
       header.classList.toggle('scrolled', window.scrollY > 10);
@@ -52,28 +50,29 @@
     onScroll();
   }
 
-  /* ── Active nav link on scroll (IntersectionObserver) ── */
+  /* ── Active nav link on scroll ── */
   var sections = document.querySelectorAll('section[id]');
   var navLinks = document.querySelectorAll('.nav__link[href^="#"]');
 
   if ('IntersectionObserver' in window && sections.length) {
-    var observer = new IntersectionObserver(function (entries) {
+    var sectionObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           navLinks.forEach(function (link) {
             var href = link.getAttribute('href');
-            var active = href === '#' + entry.target.id;
-            link.classList.toggle('active', active);
+            link.classList.toggle('active', href === '#' + entry.target.id);
           });
         }
       });
     }, { rootMargin: '-50% 0px -50% 0px' });
 
-    sections.forEach(function (s) { observer.observe(s); });
+    sections.forEach(function (s) { sectionObserver.observe(s); });
   }
 
+  /* ── Reveal animations ── */
+  var revealObserver;
   if ('IntersectionObserver' in window) {
-    var revealObserver = new IntersectionObserver(function (entries) {
+    revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           var delay = entry.target.style.getPropertyValue('--reveal-delay') || '0s';
@@ -88,7 +87,6 @@
       revealObserver.observe(el);
     });
   } else {
-    /* Fallback: show all immediately */
     document.querySelectorAll('.js-reveal').forEach(function (el) {
       el.classList.add('revealed');
     });
@@ -98,7 +96,7 @@
   var tabs = document.querySelectorAll('.services__tab');
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
-      var panelId = tab.getAttribute('aria-controls');
+      var panelId = tab.getAttribute('data-tab');
       tabs.forEach(function (t) {
         t.classList.remove('active');
         t.setAttribute('aria-selected', 'false');
@@ -108,18 +106,17 @@
       });
       tab.classList.add('active');
       tab.setAttribute('aria-selected', 'true');
-      var panel = document.getElementById(panelId);
+      var panel = document.querySelector('[data-panel="' + panelId + '"]');
       if (panel) panel.classList.add('active');
     });
   });
 
-  /* ── FAQ: exclusive accordion via <details> ── */
+  /* ── FAQ: exclusive accordion ── */
   var faqItems = document.querySelectorAll('details.faq__item');
   faqItems.forEach(function (det) {
     var summary = det.querySelector('summary');
     if (!summary) return;
-    summary.addEventListener('click', function (e) {
-      /* Close all siblings first, then let browser toggle the clicked one */
+    summary.addEventListener('click', function () {
       faqItems.forEach(function (other) {
         if (other !== det && other.open) {
           other.removeAttribute('open');
@@ -130,32 +127,21 @@
 
   /* ── HTMX: re-observe reveals after swap ── */
   document.body.addEventListener('htmx:afterSwap', function () {
-    if (!('IntersectionObserver' in window)) return;
+    if (!revealObserver) return;
     document.querySelectorAll('.js-reveal:not(.revealed)').forEach(function (el) {
       revealObserver.observe(el);
     });
   });
 
-  /* ── Hero modal ── */
+  /* ── Modal ── */
   var modalOverlay = document.getElementById('hero-modal');
-  var modalTitle = document.getElementById('modal-title');
-  var modalCloseBtn = document.getElementById('modal-close-btn');
 
-  var MODAL_TITLES = {
-    buy: 'Хочу купити землю',
-    sell: 'Хочу продати землю'
-  };
-
-  function openModal(interest) {
+  function openModal() {
     if (!modalOverlay) return;
-    if (modalTitle && MODAL_TITLES[interest]) {
-      modalTitle.textContent = MODAL_TITLES[interest];
-    }
-    var radio = modalOverlay.querySelector('input[type="radio"][value="' + interest + '"]');
-    if (radio) radio.checked = true;
     modalOverlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
-    if (modalCloseBtn) modalCloseBtn.focus();
+    var closeBtn = modalOverlay.querySelector('[data-close-modal]');
+    if (closeBtn) closeBtn.focus();
   }
 
   function closeModal() {
@@ -164,15 +150,15 @@
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('[data-modal-interest]').forEach(function (btn) {
+  document.querySelectorAll('[data-open-modal]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      openModal(btn.getAttribute('data-modal-interest'));
+      openModal();
     });
   });
 
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', closeModal);
-  }
+  document.querySelectorAll('[data-close-modal]').forEach(function (btn) {
+    btn.addEventListener('click', closeModal);
+  });
 
   if (modalOverlay) {
     modalOverlay.addEventListener('click', function (e) {

@@ -30,7 +30,7 @@ class AdvantageItemAdmin(admin.ModelAdmin):
 @admin.register(AdvantagesSection)
 class AdvantagesSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція «Переваги»', {
+        ('Секция «Преимущества»', {
             'fields': ('title', 'subtitle', 'footer_quote'),
         }),
     )
@@ -39,7 +39,7 @@ class AdvantagesSectionAdmin(SingletonAdmin):
 @admin.register(ServicesSection)
 class ServicesSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція «Послуги»', {
+        ('Секция «Услуги»', {
             'fields': ('title', 'steps_title'),
         }),
     )
@@ -48,7 +48,7 @@ class ServicesSectionAdmin(SingletonAdmin):
 @admin.register(ContactSection)
 class ContactSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція «Контакти»', {
+        ('Секция «Контакты»', {
             'fields': ('title', 'description', 'form_title', 'form_btn_text', 'privacy_note'),
         }),
     )
@@ -57,7 +57,7 @@ class ContactSectionAdmin(SingletonAdmin):
 @admin.register(FAQSection)
 class FAQSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція FAQ', {
+        ('Секция FAQ', {
             'fields': ('title',),
         }),
     )
@@ -72,10 +72,10 @@ class FAQItemAdmin(admin.ModelAdmin):
 
 @admin.register(LeadSubmission)
 class LeadSubmissionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'interest', 'created_at', 'is_processed')
-    list_filter = ('interest', 'is_processed')
+    list_display = ('name', 'phone', 'created_at', 'is_processed')
+    list_filter = ('is_processed',)
     list_editable = ('is_processed',)
-    readonly_fields = ('name', 'phone', 'interest', 'created_at')
+    readonly_fields = ('name', 'phone', 'message', 'created_at')
     ordering = ('-created_at',)
 
     def has_add_permission(self, request):

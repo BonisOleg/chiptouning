@@ -1,18 +1,21 @@
-<section class="section faq parallax-section" id="faq" aria-labelledby="faq-title">
+{% load icons i18n %}
+
+<section class="section faq section--parallax" id="faq">
   <div class="container">
-    <span class="section-label">Відповіді на запитання</span>
-    <h2 class="section-title" id="faq-title">{{ faq_section.title }}</h2>
+    <span class="section-label js-reveal">FAQ</span>
+    <h2 class="section-title js-reveal">{{ faq_section.title }}</h2>
+
     <div class="faq__list">
       {% for item in faq_items %}
-      <details class="faq__item js-reveal">
-        <summary class="faq__question">
-          {{ item.question }}
-          <span class="faq__icon" aria-hidden="true"></span>
-        </summary>
-        <div class="faq__answer">
-          <p>{{ item.answer|linebreaksbr }}</p>
-        </div>
-      </details>
+        <details class="faq__item js-reveal">
+          <summary class="faq__question">
+            {{ item.question }}
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer">
+            <p>{{ item.answer }}</p>
+          </div>
+        </details>
       {% endfor %}
     </div>
   </div>

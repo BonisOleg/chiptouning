@@ -1,63 +1,69 @@
-{% load static icons %}
-<header class="header" id="site-header">
-  <div class="container header__inner">
+{% load static icons i18n %}
 
-      <button
-        class="header__burger"
-        id="burger-btn"
-        aria-expanded="false"
-        aria-controls="mobile-nav"
-        aria-label="Відкрити меню"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+<header class="header" id="header">
+  <div class="header__inner container">
+    <button class="header__burger" aria-label="{% trans 'Меню' %}" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-      <a href="#hero" class="header__logo" aria-label="На головну">
-        {% if site.logo %}
-          <img src="{{ site.logo.url }}" alt="Логотип" class="header__logo-img" width="210" height="196">
-        {% else %}
-          <div class="header__logo-placeholder">ЛОГОТИП</div>
-        {% endif %}
-      </a>
+    <a href="{% url 'landing:index' %}" class="header__logo" aria-label="DISTAGE">
+      {% if site.logo %}
+        <img src="{{ site.logo.url }}" alt="DISTAGE" class="header__logo-img" width="160" height="56">
+      {% else %}
+        <span class="header__logo-text">DI<span>STAGE</span></span>
+      {% endif %}
+    </a>
 
-      <nav class="nav" aria-label="Головне меню">
-        <ul class="nav__list" role="list">
-          <li><a href="#about" class="nav__link">Про нас</a></li>
-          <li><a href="#services" class="nav__link">Послуги</a></li>
-          <li><a href="#advantages" class="nav__link">Переваги</a></li>
-          <li><a href="#contact" class="nav__link">Контакти</a></li>
-          <li><a href="#faq" class="nav__link">FAQ</a></li>
-        </ul>
-      </nav>
+    <nav class="nav" aria-label="{% trans 'Основная навигация' %}">
+      <ul class="nav__list">
+        <li><a href="#about" class="nav__link" data-close-nav>{% trans "О нас" %}</a></li>
+        <li><a href="#services" class="nav__link" data-close-nav>{% trans "Услуги" %}</a></li>
+        <li><a href="#steps" class="nav__link" data-close-nav>{% trans "Как работаем" %}</a></li>
+        <li><a href="#advantages" class="nav__link" data-close-nav>{% trans "Преимущества" %}</a></li>
+        <li><a href="#contact" class="nav__link" data-close-nav>{% trans "Контакты" %}</a></li>
+        <li><a href="#faq" class="nav__link" data-close-nav>FAQ</a></li>
+      </ul>
+    </nav>
 
-      <div class="header__actions">
-        {% if site.phone %}
-          <a href="tel:{{ site.phone }}" class="header__phone">{{ site.phone }}</a>
-        {% endif %}
+    <div class="header__actions">
+      <div class="lang-switch">
+        {% language 'ru' %}<a href="{% url 'landing:index' %}" class="lang-switch__btn {% if LANGUAGE_CODE == 'ru' %}active{% endif %}">RU</a>{% endlanguage %}
+        {% language 'uk' %}<a href="{% url 'landing:index' %}" class="lang-switch__btn {% if LANGUAGE_CODE == 'uk' %}active{% endif %}">UK</a>{% endlanguage %}
       </div>
 
+      {% if site.phone %}
+        <a href="tel:{{ site.phone|cut:' '|cut:'-' }}" class="header__phone">
+          {% icon "phone" %} {{ site.phone }}
+        </a>
+      {% endif %}
+
+      <a href="#contact" class="btn btn--accent btn--sm" data-close-nav>
+        {{ site.call_btn_text }}
+      </a>
+    </div>
   </div>
 </header>
 
-<nav class="nav--mobile" id="mobile-nav" aria-label="Мобільне меню" role="navigation">
-  <ul class="nav__list" role="list">
-    <li><a href="#about" class="nav__link" data-close-nav>Про нас</a></li>
-    <li><a href="#services" class="nav__link" data-close-nav>Послуги</a></li>
-    <li><a href="#advantages" class="nav__link" data-close-nav>Переваги</a></li>
-    <li><a href="#contact" class="nav__link" data-close-nav>Контакти</a></li>
+<nav class="nav--mobile" id="mobile-nav" aria-label="{% trans 'Мобильная навигация' %}">
+  <ul class="nav__list">
+    <li><a href="#about" class="nav__link" data-close-nav>{% trans "О нас" %}</a></li>
+    <li><a href="#services" class="nav__link" data-close-nav>{% trans "Услуги" %}</a></li>
+    <li><a href="#steps" class="nav__link" data-close-nav>{% trans "Как работаем" %}</a></li>
+    <li><a href="#advantages" class="nav__link" data-close-nav>{% trans "Преимущества" %}</a></li>
+    <li><a href="#contact" class="nav__link" data-close-nav>{% trans "Контакты" %}</a></li>
     <li><a href="#faq" class="nav__link" data-close-nav>FAQ</a></li>
   </ul>
-  <div class="nav--mobile__actions">
+  <div class="header__actions">
     {% if site.phone %}
-      <a href="tel:{{ site.phone }}" class="header__phone" style="color:#fff">{{ site.phone }}</a>
+      <a href="tel:{{ site.phone|cut:' '|cut:'-' }}" class="header__phone">
+        {% icon "phone" %} {{ site.phone }}
+      </a>
     {% endif %}
   </div>
 </nav>
 
 {% if site.phone %}
-  <a href="tel:{{ site.phone }}" class="mobile-call-btn" aria-label="Замовити дзвінок">
-    {% icon 'phone' %}
+  <a href="tel:{{ site.phone|cut:' '|cut:'-' }}" class="mobile-call-btn" aria-label="{% trans 'Позвонить' %}">
+    {% icon "phone" %}
   </a>
 {% endif %}

@@ -1,38 +1,65 @@
-{% load static %}
-<footer class="footer" role="contentinfo">
+{% load static icons i18n %}
+
+<footer class="footer">
   <div class="footer__inner">
-    <div>
-      {% if site.logo %}
-        <img src="{{ site.logo.url }}" alt="Логотип" class="footer__logo-img" width="210" height="196">
-      {% else %}
-        <div class="footer__logo-placeholder">ЛОГОТИП</div>
-      {% endif %}
-      <p class="footer__logo-text">Короткий опис вашої діяльності або місія компанії.</p>
+    <div class="footer__brand">
+      <a href="{% url 'landing:index' %}" aria-label="DISTAGE">
+        {% if site.logo %}
+          <img src="{{ site.logo.url }}" alt="DISTAGE" class="footer__logo-img" width="140" height="70">
+        {% else %}
+          <span class="header__logo-text">DI<span>STAGE</span></span>
+        {% endif %}
+      </a>
+      <p class="footer__logo-text">
+        {% trans "Профессиональный чип-тюнинг и калибровка ЭБУ для легкового и коммерческого транспорта." %}
+      </p>
     </div>
 
-    <nav aria-label="Навігація в футері">
-      <p class="footer__nav-title">Навігація</p>
-      <ul class="footer__nav-list" role="list">
-        <li><a href="#about" class="footer__nav-link">Про нас</a></li>
-        <li><a href="#services" class="footer__nav-link">Послуги</a></li>
-        <li><a href="#advantages" class="footer__nav-link">Переваги</a></li>
-        <li><a href="#contact" class="footer__nav-link">Контакти</a></li>
+    <div class="footer__nav">
+      <p class="footer__nav-title">{% trans "Навигация" %}</p>
+      <ul class="footer__nav-list">
+        <li><a href="#about" class="footer__nav-link">{% trans "О нас" %}</a></li>
+        <li><a href="#services" class="footer__nav-link">{% trans "Услуги" %}</a></li>
+        <li><a href="#steps" class="footer__nav-link">{% trans "Как работаем" %}</a></li>
+        <li><a href="#contact" class="footer__nav-link">{% trans "Контакты" %}</a></li>
         <li><a href="#faq" class="footer__nav-link">FAQ</a></li>
       </ul>
-    </nav>
+    </div>
   </div>
 
   <div class="footer__bottom">
     <div class="footer__copyright">
-      <p class="footer__copyright-text">
-        &copy; {% now "Y" %} Назва компанії. Всі права захищені.
-      </p>
-      <p class="footer__credit">
-        Розробка сайту <a href="#" class="footer__credit-link">Ваша студія</a>
-      </p>
+      <p class="footer__copyright-text">&copy; {% now "Y" %} DISTAGE. {% trans "Все права защищены." %}</p>
     </div>
-    {% if site.phone %}
-      <a href="tel:{{ site.phone }}" class="footer__nav-link">{{ site.phone }}</a>
-    {% endif %}
+
+    <div class="footer__social">
+      {% if site.telegram_url %}
+        <a href="{{ site.telegram_url }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="Telegram">
+          {% icon "telegram" %}
+        </a>
+      {% endif %}
+      {% if site.viber_url %}
+        <a href="{{ site.viber_url }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="Viber">
+          {% icon "viber" %}
+        </a>
+      {% endif %}
+      {% if site.whatsapp_url %}
+        <a href="{{ site.whatsapp_url }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+          {% icon "whatsapp" %}
+        </a>
+      {% endif %}
+      {% if site.instagram_url %}
+        <a href="{{ site.instagram_url }}" class="footer__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+          {% icon "instagram" %}
+        </a>
+      {% endif %}
+    </div>
+
+    <p class="footer__credit">
+      {% trans "Разработка:" %}
+      <a href="https://www.distage.com" class="footer__credit-link" target="_blank" rel="noopener">
+        distage.com
+      </a>
+    </p>
   </div>
 </footer>

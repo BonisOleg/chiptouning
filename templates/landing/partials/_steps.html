@@ -1,20 +1,22 @@
-<section class="section steps parallax-section" id="steps" aria-labelledby="steps-title">
+{% load icons i18n %}
+
+<section class="section steps section--parallax" id="steps">
   <div class="container">
     <div class="steps__title-wrap">
-      <span class="section-label">Як ми працюємо</span>
-      <h2 class="section-title" id="steps-title">{{ services_section.steps_title }}</h2>
+      <span class="section-label js-reveal">{% trans "Процесс работы" %}</span>
+      <h2 class="section-title js-reveal">{{ services_section.steps_title }}</h2>
     </div>
 
-    <div class="steps__timeline" role="list">
+    <div class="steps__timeline">
       {% for step in steps %}
-      <div class="step{% if step.is_highlighted %} step--highlighted{% endif %} js-reveal" role="listitem">
-        <div class="step__dot" aria-hidden="true">{{ step.number }}</div>
-        <div class="step__body">
-          <p class="step__num">Крок {{ step.number }}</p>
-          <h3 class="step__title">{{ step.title }}</h3>
-          <p class="step__text">{{ step.description }}</p>
+        <div class="step {% if step.is_highlighted %}step--highlighted{% endif %} js-reveal">
+          <div class="step__dot">{{ step.number }}</div>
+          <div class="step__body">
+            <p class="step__num">{% trans "Шаг" %} {{ step.number }}</p>
+            <h3 class="step__title">{{ step.title }}</h3>
+            <p class="step__text">{{ step.description }}</p>
+          </div>
         </div>
-      </div>
       {% endfor %}
     </div>
   </div>

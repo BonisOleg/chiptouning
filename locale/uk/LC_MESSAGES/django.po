@@ -1,0 +1,119 @@
+# DISTAGE Chip Tuning — Ukrainian translations
+# Copyright (C) 2026 DISTAGE
+msgid ""
+msgstr ""
+"Project-Id-Version: DISTAGE 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-11 10:39+0200\n"
+"PO-Revision-Date: 2026-03-11 10:39+0200\n"
+"Last-Translator: DISTAGE <distageavto@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Профессиональный чип-тюнинг"
+msgstr "Професійний чіп-тюнінг"
+
+msgid ""
+"Чип-тюнинг, удаление DPF, EGR, AdBlue, калибровка ЭБУ. Качественные прошивки "
+"для легкового и коммерческого транспорта."
+msgstr ""
+"Чіп-тюнінг, видалення DPF, EGR, AdBlue, калібрування ЕБУ. Якісні прошивки "
+"для легкового та комерційного транспорту."
+
+msgid "Заявка отправлена"
+msgstr "Заявку надіслано"
+
+msgid "Мы свяжемся с вами в кратчайшее время. Спасибо за доверие!"
+msgstr "Ми зв'яжемося з вами найближчим часом. Дякуємо за довіру!"
+
+msgid "О компании"
+msgstr "Про компанію"
+
+msgid "Наши преимущества"
+msgstr "Наші переваги"
+
+msgid "Связаться с нами"
+msgstr "Зв'язатися з нами"
+
+msgid "Телефон"
+msgstr "Телефон"
+
+msgid "Почта"
+msgstr "Пошта"
+
+msgid ""
+"Профессиональный чип-тюнинг и калибровка ЭБУ для легкового и коммерческого "
+"транспорта."
+msgstr ""
+"Професійний чіп-тюнінг і калібрування ЕБУ для легкового та комерційного "
+"транспорту."
+
+msgid "Навигация"
+msgstr "Навігація"
+
+msgid "О нас"
+msgstr "Про нас"
+
+msgid "Услуги"
+msgstr "Послуги"
+
+msgid "Как работаем"
+msgstr "Як працюємо"
+
+msgid "Контакты"
+msgstr "Контакти"
+
+msgid "Все права защищены."
+msgstr "Всі права захищені."
+
+msgid "Разработка:"
+msgstr "Розробка:"
+
+msgid "Меню"
+msgstr "Меню"
+
+msgid "Основная навигация"
+msgstr "Основна навігація"
+
+msgid "Преимущества"
+msgstr "Переваги"
+
+msgid "Мобильная навигация"
+msgstr "Мобільна навігація"
+
+msgid "Позвонить"
+msgstr "Зателефонувати"
+
+msgid "Узнать больше"
+msgstr "Дізнатися більше"
+
+msgid "Ваше имя"
+msgstr "Ваше ім'я"
+
+msgid "Дмитрий"
+msgstr "Дмитро"
+
+msgid "Закрыть"
+msgstr "Закрити"
+
+msgid "Что мы делаем"
+msgstr "Що ми робимо"
+
+msgid "Удаление систем"
+msgstr "Видалення систем"
+
+msgid "Настройка мощности"
+msgstr "Налаштування потужності"
+
+msgid "Процесс работы"
+msgstr "Процес роботи"
+
+msgid "Шаг"
+msgstr "Крок"

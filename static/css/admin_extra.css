@@ -1,0 +1,11 @@
+.admin-img-preview--logo {
+    max-height: 80px;
+    border-radius: 4px;
+}
+
+.admin-img-preview--bg {
+    max-width: 400px;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+}

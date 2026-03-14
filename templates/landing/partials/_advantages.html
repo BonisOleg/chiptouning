@@ -1,28 +1,29 @@
-{% load icons %}
-<section class="section advantages" id="advantages" aria-labelledby="adv-title">
+{% load icons i18n %}
+
+<section class="section advantages" id="advantages">
   <div class="container">
     <div class="advantages__header">
-      <span class="section-label" style="color:var(--color-accent-light)">Переваги</span>
-      <h2 class="section-title section-title--light" id="adv-title">{{ advantages_section.title }}</h2>
-      {% if advantages_section.subtitle %}
-        <p class="advantages__subtitle">{{ advantages_section.subtitle }}</p>
-      {% endif %}
+      <span class="section-label js-reveal">{% trans "Наши преимущества" %}</span>
+      <h2 class="section-title js-reveal">{{ advantages_section.title }}</h2>
+      <p class="advantages__subtitle js-reveal">{{ advantages_section.subtitle }}</p>
     </div>
 
-    <div class="advantages__grid" role="list">
+    <div class="advantages__grid">
       {% for adv in advantages %}
-      <div class="advantage-card js-reveal" role="listitem">
-        <div class="advantage-card__icon" aria-hidden="true">{% icon adv.icon_key %}</div>
-        <h3 class="advantage-card__title">{{ adv.title }}</h3>
-        <p class="advantage-card__text">{{ adv.description }}</p>
-      </div>
+        <div class="advantage-card js-reveal">
+          <div class="advantage-card__icon">
+            {% icon adv.icon_key %}
+          </div>
+          <h3 class="advantage-card__title">{{ adv.title }}</h3>
+          <p class="advantage-card__text">{{ adv.description }}</p>
+        </div>
       {% endfor %}
     </div>
 
     {% if advantages_section.footer_quote %}
-    <div class="advantages__quote js-reveal">
-      <p>{{ advantages_section.footer_quote }}</p>
-    </div>
+      <div class="advantages__quote js-reveal">
+        <p>{{ advantages_section.footer_quote }}</p>
+      </div>
     {% endif %}
   </div>
 </section>

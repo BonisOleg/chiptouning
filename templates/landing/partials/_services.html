@@ -1,51 +1,47 @@
-<section class="section section--cream" id="services" aria-label="{{ services_section.title }}">
-  <div class="container">
-    <span class="section-label">Послуги</span>
-    <h2 class="section-title">{{ services_section.title }}</h2>
+{% load icons i18n %}
 
-    <div class="services__tabs" role="tablist" aria-label="Категорії послуг">
-      <button
-        class="services__tab active"
-        role="tab"
-        aria-selected="true"
-        aria-controls="panel-cat1"
-        id="tab-cat1"
-        data-tab="cat1"
-      >Категорія 1</button>
-      <button
-        class="services__tab"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-cat2"
-        id="tab-cat2"
-        data-tab="cat2"
-      >Категорія 2</button>
+<section class="section section--darker" id="services">
+  <div class="container">
+    <span class="section-label js-reveal">{% trans "Что мы делаем" %}</span>
+    <h2 class="section-title js-reveal">{{ services_section.title }}</h2>
+
+    <div class="services__tabs js-reveal" role="tablist">
+      <button class="services__tab active" role="tab" aria-selected="true" data-tab="removal">
+        {% trans "Удаление систем" %}
+      </button>
+      <button class="services__tab" role="tab" aria-selected="false" data-tab="tuning">
+        {% trans "Настройка мощности" %}
+      </button>
     </div>
 
-    <div class="services__panel active" id="panel-cat1" role="tabpanel" aria-labelledby="tab-cat1">
+    <div class="services__panel active" data-panel="removal">
       <div class="services__grid">
-        {% for item in service_cat1 %}
-        <div class="service-card js-reveal">
-          <span class="service-card__num" aria-hidden="true">{{ forloop.counter }}</span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">{{ item.title }}</h3>
-            <p class="service-card__text">{{ item.description }}</p>
+        {% for svc in service_cat1 %}
+          <div class="service-card js-reveal">
+            <div class="service-card__icon">
+              {% icon svc.icon_key %}
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">{{ svc.title }}</h3>
+              <p class="service-card__text">{{ svc.description }}</p>
+            </div>
           </div>
-        </div>
         {% endfor %}
       </div>
     </div>
 
-    <div class="services__panel" id="panel-cat2" role="tabpanel" aria-labelledby="tab-cat2">
+    <div class="services__panel" data-panel="tuning">
       <div class="services__grid">
-        {% for item in service_cat2 %}
-        <div class="service-card js-reveal">
-          <span class="service-card__num" aria-hidden="true">{{ forloop.counter }}</span>
-          <div class="service-card__body">
-            <h3 class="service-card__title">{{ item.title }}</h3>
-            <p class="service-card__text">{{ item.description }}</p>
+        {% for svc in service_cat2 %}
+          <div class="service-card js-reveal">
+            <div class="service-card__icon">
+              {% icon svc.icon_key %}
+            </div>
+            <div class="service-card__body">
+              <h3 class="service-card__title">{{ svc.title }}</h3>
+              <p class="service-card__text">{{ svc.description }}</p>
+            </div>
           </div>
-        </div>
         {% endfor %}
       </div>
     </div>

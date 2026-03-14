@@ -1,7 +1,9 @@
-<section class="section section--cream" id="about" aria-labelledby="about-title">
+{% load icons i18n %}
+
+<section class="section section--card section--parallax" id="about">
   <div class="container">
-    <span class="section-label">Про компанію</span>
-    <h2 class="section-title" id="about-title">{{ about.title }}</h2>
+    <span class="section-label js-reveal">{% trans "О компании" %}</span>
+    <h2 class="section-title js-reveal">{{ about.title }}</h2>
 
     <div class="about__grid">
       <div class="about__philosophy js-reveal">
@@ -9,12 +11,12 @@
         <div class="about__philosophy-text">{{ about.philosophy_text|linebreaksbr }}</div>
       </div>
 
-      <div class="about__deco js-reveal" style="--reveal-delay:.15s">
-        {% for stat in stats %}
-        <div class="about__stat-pill">
-          <span class="about__stat-num">{{ stat.value }}</span>
-          <span class="about__stat-lbl">{{ stat.label }}</span>
-        </div>
+      <div class="about__deco">
+        {% for s in stats %}
+          <div class="about__stat-pill js-reveal">
+            <span class="about__stat-num">{{ s.value }}</span>
+            <span class="about__stat-lbl">{{ s.label }}</span>
+          </div>
         {% endfor %}
       </div>
     </div>

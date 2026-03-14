@@ -1,56 +1,40 @@
-{% load static %}
-<form
-  class="form"
-  hx-post="{% url 'landing:lead' %}"
-  hx-target="#lead-form-area"
-  hx-swap="innerHTML"
-  novalidate
->
+{% load icons i18n %}
+
+<form class="form"
+      hx-post="{% url 'landing:lead' %}"
+      hx-target="{{ form_target|default:'#lead-form-area' }}"
+      hx-swap="innerHTML">
   {% csrf_token %}
 
-  <div class="form__group">
-    <label class="form__label" for="lead-name">Ваше ім'я</label>
-    <input
-      class="form__input"
-      type="text"
-      id="lead-name"
-      name="name"
-      placeholder="Введіть ім'я"
-      required
-      autocomplete="given-name"
-    >
+  <div class="form__honeypot" aria-hidden="true">
+    <label for="{{ form_id_prefix|default:'lead' }}-website">Website</label>
+    <input type="text" id="{{ form_id_prefix|default:'lead' }}-website"
+           name="website" tabindex="-1" autocomplete="off">
   </div>
 
   <div class="form__group">
-    <label class="form__label" for="lead-phone">Ваш телефон</label>
-    <input
-      class="form__input"
-      type="tel"
-      id="lead-phone"
-      name="phone"
-      placeholder="+380 __ ___ __ __"
-      required
-      autocomplete="tel"
-      inputmode="tel"
-    >
+    <label class="form__label" for="{{ form_id_prefix|default:'lead' }}-name">{% trans "Ваше имя" %}</label>
+    <input class="form__input" type="text" id="{{ form_id_prefix|default:'lead' }}-name"
+           name="name" placeholder="{% trans 'Дмитрий' %}"
+           required autocomplete="name" maxlength="120">
   </div>
 
   <div class="form__group">
-    <span class="form__label" id="interest-label">Що вас цікавить?</span>
-    <div class="form__radio-group" role="radiogroup" aria-labelledby="interest-label">
-      <label class="form__radio">
-        <input type="radio" name="interest" value="service1" checked> Послуга 1
-      </label>
-      <label class="form__radio">
-        <input type="radio" name="interest" value="service2"> Послуга 2
-      </label>
-      <label class="form__radio">
-        <input type="radio" name="interest" value="consult"> Консультація
-      </label>
-    </div>
+    <label class="form__label" for="{{ form_id_prefix|default:'lead' }}-phone">{% trans "Телефон" %}</label>
+    <input class="form__input" type="tel" id="{{ form_id_prefix|default:'lead' }}-phone"
+           name="phone" placeholder="+380 __ ___ __ __"
+           required autocomplete="tel" maxlength="20">
   </div>
 
-  <button type="submit" class="btn btn--gold form__submit">
+  <div class="form__group">
+    <label class="form__label" for="{{ form_id_prefix|default:'lead' }}-message">{% trans "Марка авто / задача (опционально)" %}</label>
+    <textarea class="form__input form__textarea"
+              id="{{ form_id_prefix|default:'lead' }}-message"
+              name="message" rows="3" maxlength="500"
+              placeholder="{% trans 'Например: BMW 320d 2014, хочу Stage 1' %}"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn--accent form__submit">
     {{ contact.form_btn_text }}
   </button>
 

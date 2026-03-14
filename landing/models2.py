@@ -3,188 +3,186 @@ from .models1 import SingletonModel
 
 
 class WorkStep(models.Model):
-    number = models.PositiveSmallIntegerField(verbose_name='Номер кроку')
+    number = models.PositiveSmallIntegerField(verbose_name='Номер шага')
     title = models.CharField(max_length=160, verbose_name='Заголовок')
-    description = models.TextField(verbose_name='Опис')
+    description = models.TextField(verbose_name='Описание')
     is_highlighted = models.BooleanField(
         default=False,
-        verbose_name='Виділити (Акцент)'
+        verbose_name='Выделить (акцент)'
     )
     order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
 
     class Meta:
         ordering = ['order']
-        verbose_name = 'Крок роботи'
-        verbose_name_plural = 'Етапи роботи'
+        verbose_name = 'Шаг работы'
+        verbose_name_plural = 'Этапы работы'
 
-    def __str__(self):
-        return f'Крок {self.number}: {self.title}'
+    def __str__(self) -> str:
+        return f'Шаг {self.number}: {self.title}'
 
 
 class StatItem(models.Model):
-    value = models.CharField(max_length=40, verbose_name='Значення')
-    label = models.CharField(max_length=120, verbose_name='Підпис')
+    value = models.CharField(max_length=40, verbose_name='Значение')
+    label = models.CharField(max_length=120, verbose_name='Подпись')
     order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
 
     class Meta:
         ordering = ['order']
         verbose_name = 'Статистика'
-        verbose_name_plural = 'Статистика (цифри)'
+        verbose_name_plural = 'Статистика (цифры)'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.value} — {self.label}'
 
 
 ICON_CHOICES = [
-    ('shield', 'Щит (безпека)'),
-    ('chart', 'Графік (вигода)'),
-    ('clock', 'Годинник (досвід)'),
-    ('key', 'Ключ (під ключ)'),
-    ('eye', 'Око (моніторинг)'),
-    ('checkmark', 'Галочка (гарантія)'),
-    ('star', 'Зірка'),
+    ('shield', 'Щит (безопасность)'),
+    ('chart', 'График (выгода)'),
+    ('clock', 'Часы (опыт)'),
+    ('key', 'Ключ (под ключ)'),
+    ('eye', 'Глаз (мониторинг)'),
+    ('checkmark', 'Галочка (гарантия)'),
+    ('star', 'Звезда'),
     ('map', 'Карта'),
+    ('engine', 'Двигатель'),
+    ('speed', 'Спидометр'),
+    ('fuel', 'Топливо'),
+    ('wrench', 'Гаечный ключ'),
+    ('power', 'Молния (мощность)'),
+    ('headset', 'Поддержка'),
 ]
 
 
 class AdvantageItem(models.Model):
     icon_key = models.CharField(
         max_length=20, choices=ICON_CHOICES, default='shield',
-        verbose_name='Іконка'
+        verbose_name='Иконка'
     )
     title = models.CharField(max_length=120, verbose_name='Заголовок')
-    description = models.TextField(verbose_name='Опис')
+    description = models.TextField(verbose_name='Описание')
     order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
 
     class Meta:
         ordering = ['order']
-        verbose_name = 'Перевага'
-        verbose_name_plural = 'Переваги'
+        verbose_name = 'Преимущество'
+        verbose_name_plural = 'Преимущества'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
 
 class AdvantagesSection(SingletonModel):
     title = models.CharField(
         max_length=120,
-        default='Чому обирають нас?',
-        verbose_name='Заголовок секції'
+        default='Почему выбирают нас?',
+        verbose_name='Заголовок секции'
     )
     subtitle = models.CharField(
         max_length=200,
-        default='Ми пропонуємо найкращі рішення для вашого бізнесу.',
-        verbose_name='Підзаголовок'
+        default='Качество, поддержка и индивидуальный подход.',
+        verbose_name='Подзаголовок'
     )
     footer_quote = models.TextField(
-        default='Ми працюємо на ваш результат.',
-        verbose_name='Цитата внизу блоку'
+        default='Мы не бросаем в трудной ситуации.',
+        verbose_name='Цитата внизу блока'
     )
 
     class Meta:
-        verbose_name = 'Секція «Переваги»'
-        verbose_name_plural = 'Секція «Переваги»'
+        verbose_name = 'Секция «Преимущества»'
+        verbose_name_plural = 'Секция «Преимущества»'
 
-    def __str__(self):
-        return 'Переваги'
+    def __str__(self) -> str:
+        return 'Преимущества'
 
 
 class ServicesSection(SingletonModel):
     title = models.CharField(
-        max_length=120, default='Наші послуги',
-        verbose_name='Заголовок секції'
+        max_length=120, default='Наши услуги',
+        verbose_name='Заголовок секции'
     )
     steps_title = models.CharField(
         max_length=160,
-        default='Як ми працюємо: основні етапи',
-        verbose_name='Заголовок блоку кроків'
+        default='Как мы работаем',
+        verbose_name='Заголовок блока шагов'
     )
 
     class Meta:
-        verbose_name = 'Секція «Послуги»'
-        verbose_name_plural = 'Секція «Послуги»'
+        verbose_name = 'Секция «Услуги»'
+        verbose_name_plural = 'Секция «Услуги»'
 
-    def __str__(self):
-        return 'Послуги'
+    def __str__(self) -> str:
+        return 'Услуги'
 
 
 class ContactSection(SingletonModel):
     title = models.CharField(
         max_length=120,
-        default='Зв\'яжіться з нами',
+        default='Свяжитесь с нами',
         verbose_name='Заголовок'
     )
     description = models.TextField(
-        default='Залиште заявку, і ми зв\'яжемося з вами найближчим часом.',
-        verbose_name='Опис'
+        default='Оставьте заявку — мы перезвоним в кратчайшее время.',
+        verbose_name='Описание'
     )
     form_title = models.CharField(
         max_length=120,
-        default='Залишити заявку',
-        verbose_name='Заголовок форми'
+        default='Оставить заявку',
+        verbose_name='Заголовок формы'
     )
     form_btn_text = models.CharField(
         max_length=80,
-        default='ВІДПРАВИТИ',
-        verbose_name='Текст кнопки форми'
+        default='ОТПРАВИТЬ',
+        verbose_name='Текст кнопки формы'
     )
     privacy_note = models.CharField(
         max_length=200,
-        default='Ваші дані в безпеці. Ми гарантуємо повну конфіденційність.',
-        verbose_name='Приміт. конфіденційності'
+        default='Ваши данные в безопасности. Мы гарантируем конфиденциальность.',
+        verbose_name='Прим. конфиденциальности'
     )
 
     class Meta:
-        verbose_name = 'Секція «Контакти»'
-        verbose_name_plural = 'Секція «Контакти»'
+        verbose_name = 'Секция «Контакты»'
+        verbose_name_plural = 'Секция «Контакты»'
 
-    def __str__(self):
-        return 'Контакти'
+    def __str__(self) -> str:
+        return 'Контакты'
 
 
 class FAQSection(SingletonModel):
     title = models.CharField(
-        max_length=120, default='Часті запитання',
-        verbose_name='Заголовок секції'
+        max_length=120, default='Частые вопросы',
+        verbose_name='Заголовок секции'
     )
 
     class Meta:
-        verbose_name = 'Секція FAQ'
-        verbose_name_plural = 'Секція FAQ'
+        verbose_name = 'Секция FAQ'
+        verbose_name_plural = 'Секция FAQ'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return 'FAQ'
 
 
 class FAQItem(models.Model):
-    question = models.CharField(max_length=255, verbose_name='Запитання')
-    answer = models.TextField(verbose_name='Відповідь')
+    question = models.CharField(max_length=255, verbose_name='Вопрос')
+    answer = models.TextField(verbose_name='Ответ')
     order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
 
     class Meta:
         ordering = ['order']
-        verbose_name = 'Питання-відповідь'
-        verbose_name_plural = 'FAQ (Питання-відповіді)'
+        verbose_name = 'Вопрос-ответ'
+        verbose_name_plural = 'FAQ (Вопросы-ответы)'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.question
 
 
 class LeadSubmission(models.Model):
-    INTEREST_CHOICES = [
-        ('service1', 'Послуга 1'),
-        ('service2', 'Послуга 2'),
-        ('consult', 'Консультація'),
-    ]
-    name = models.CharField(max_length=120, verbose_name="Ім'я")
+    name = models.CharField(max_length=120, verbose_name='Имя')
     phone = models.CharField(max_length=20, verbose_name='Телефон')
-    interest = models.CharField(
-        max_length=20, choices=INTEREST_CHOICES,
-        verbose_name='Запит'
-    )
+    message = models.TextField(blank=True, default='', verbose_name='Сообщение')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     is_processed = models.BooleanField(
-        default=False, verbose_name='Оброблено'
+        default=False, verbose_name='Обработано'
     )
 
     class Meta:
@@ -192,5 +190,5 @@ class LeadSubmission(models.Model):
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
 
-    def __str__(self):
-        return f'{self.name} ({self.phone}) — {self.get_interest_display()}'
+    def __str__(self) -> str:
+        return f'{self.name} ({self.phone})'

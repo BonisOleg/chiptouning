@@ -1,28 +1,32 @@
-{% load static %}
-<section class="hero" id="hero" aria-label="{{ hero.title }}">
-  <div class="hero__bg" aria-hidden="true"></div>
+{% load static icons i18n %}
+
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
 
   <div class="hero__inner">
-    <div class="hero__badge" aria-hidden="true">
-      <span>Ваш статус</span>
-      <span>·</span>
-      <span>Ваша перевага</span>
+    <span class="hero__badge js-reveal">CHIP TUNING & ECU CALIBRATION</span>
+
+    {% if site.logo %}
+      <img src="{{ site.logo.url }}" alt="DISTAGE" class="hero__logo-mini js-reveal" width="200" height="100">
+    {% endif %}
+
+    <h1 class="hero__title js-reveal">{{ hero.title }}</h1>
+
+    <p class="hero__subtitle js-reveal">{{ hero.subtitle }}</p>
+
+    <div class="hero__actions js-reveal">
+      <button class="btn btn--accent" data-open-modal>
+        {{ hero.btn_buy_text }}
+      </button>
+      <a href="#services" class="btn btn--outline">
+        {{ hero.btn_sell_text }}
+      </a>
     </div>
 
-    <div class="hero__logo-mini-placeholder" style="width: 100px; height: 100px; background: rgba(255,255,255,0.1); margin: 0 auto 2rem; display: flex; align-items: center; justify-content: center; border-radius: 50%;">ЛОГО</div>
-
-    <h1 class="hero__title">{{ hero.title }}</h1>
-
-    <p class="hero__subtitle">{{ hero.subtitle }}</p>
-
-    <div class="hero__actions">
-      <button class="btn btn--gold" data-modal-interest="buy">{{ hero.btn_buy_text }}</button>
-      <button class="btn btn--gold" data-modal-interest="sell">{{ hero.btn_sell_text }}</button>
-    </div>
-
-    <div class="hero__scroll" aria-hidden="true">
-      <span class="hero__scroll-line"></span>
-      <span>Гортайте вниз</span>
+    <div class="hero__scroll js-reveal">
+      <span>{% trans "Узнать больше" %}</span>
+      <div class="hero__scroll-line"></div>
+      {% icon "scroll-down" %}
     </div>
   </div>
 </section>

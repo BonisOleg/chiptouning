@@ -13,12 +13,15 @@ class SingletonAdmin(admin.ModelAdmin):
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(SingletonAdmin):
+    class Media:
+        css = {'all': ('css/admin_extra.css',)}
+
     fieldsets = (
-        ('Логотип та контакти', {
+        ('Логотип и контакты', {
             'fields': ('logo', 'logo_preview', 'phone', 'email', 'address'),
         }),
-        ('Месенджери', {
-            'fields': ('telegram_url', 'viber_url', 'whatsapp_url'),
+        ('Мессенджеры', {
+            'fields': ('telegram_url', 'viber_url', 'whatsapp_url', 'instagram_url'),
         }),
         ('Кнопки', {
             'fields': ('call_btn_text',),
@@ -29,17 +32,20 @@ class SiteSettingsAdmin(SingletonAdmin):
     def logo_preview(self, obj):
         if obj.logo:
             return format_html(
-                '<img src="{}" style="max-height:80px;border-radius:4px;" />',
+                '<img src="{}" class="admin-img-preview--logo" alt="logo preview" />',
                 obj.logo.url
             )
         return '—'
-    logo_preview.short_description = 'Попередній перегляд'
+    logo_preview.short_description = 'Предпросмотр'
 
 
 @admin.register(HeroSection)
 class HeroSectionAdmin(SingletonAdmin):
+    class Media:
+        css = {'all': ('css/admin_extra.css',)}
+
     fieldsets = (
-        ('Тексти', {
+        ('Тексты', {
             'fields': ('title', 'subtitle', 'btn_buy_text', 'btn_sell_text'),
         }),
         ('Фон', {
@@ -51,18 +57,17 @@ class HeroSectionAdmin(SingletonAdmin):
     def bg_preview(self, obj):
         if obj.bg_image:
             return format_html(
-                '<img src="{}" style="max-width:400px;max-height:160px;'
-                'object-fit:cover;border-radius:6px;" />',
+                '<img src="{}" class="admin-img-preview--bg" alt="bg preview" />',
                 obj.bg_image.url
             )
         return '—'
-    bg_preview.short_description = 'Попередній перегляд'
+    bg_preview.short_description = 'Предпросмотр'
 
 
 @admin.register(AboutSection)
 class AboutSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ('Секція «Про нас»', {
+        ('Секция «О нас»', {
             'fields': ('title', 'philosophy_title', 'philosophy_text'),
         }),
     )
@@ -70,7 +75,7 @@ class AboutSectionAdmin(SingletonAdmin):
 
 @admin.register(ServiceItem)
 class ServiceItemAdmin(admin.ModelAdmin):
-    list_display = ('category', 'title', 'order')
+    list_display = ('category', 'icon_key', 'title', 'order')
     list_editable = ('order',)
     list_filter = ('category',)
     ordering = ('category', 'order')

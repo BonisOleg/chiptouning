@@ -2,7 +2,6 @@
    Mobile & iOS Safari Fixes
    ======================================== */
 
-/* Safe area insets for notch/dynamic island */
 .header {
   padding-inline: max(var(--container-pad), env(safe-area-inset-left))
                   max(var(--container-pad), env(safe-area-inset-right));
@@ -12,7 +11,6 @@
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
 }
 
-/* Fix 100vh on iOS (address bar reflow) */
 .hero {
   min-height: 100svh;
 }
@@ -23,26 +21,23 @@
   }
 }
 
-/* Prevent iOS auto-zoom on input focus (font-size >= 16px) */
 .form__input {
   font-size: max(16px, var(--size-base));
 }
 
-/* iOS Safari scroll momentum */
 .nav--mobile {
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
   max-height: calc(100dvh - var(--header-h));
 }
 
-/* Tap highlight suppression */
 a,
 button,
 [role="button"] {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Tablet (768–1023px) ── */
+/* Tablet (768-1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   :root {
     --header-h: 72px;
@@ -71,13 +66,9 @@ button,
   .contact__inner {
     grid-template-columns: 1fr;
   }
-
-  .prozorro__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
-/* ── Mobile: form submit button (avoid text overflow) ── */
+/* Mobile form */
 @media (max-width: 767px) {
   .form__submit {
     font-size: clamp(0.75rem, 3.5vw, .9rem);
@@ -90,7 +81,7 @@ button,
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative; /* For absolute positioning of logo */
+    position: relative;
   }
 
   .header__burger {
@@ -112,12 +103,12 @@ button,
     z-index: 10;
   }
 
-  .header__actions .btn--gold.btn--sm {
-    display: none; /* Hide the original header button on mobile */
+  .header__actions .btn--accent.btn--sm {
+    display: none;
   }
 
   .mobile-call-btn {
-    display: flex; /* Show FAB on mobile */
+    display: flex;
     position: fixed;
     bottom: 1.5rem;
     left: 1.5rem;
@@ -129,22 +120,22 @@ button,
     color: #fff;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 20px rgba(229, 9, 20, .4);
     -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* ── Header call button on narrow mobile (e.g. 375px): smaller, shift left ── */
+/* Narrow mobile */
 @media (max-width: 480px) {
-  .header__actions .btn--gold.btn--sm {
+  .header__actions .btn--accent.btn--sm {
     padding-inline: calc(1.25rem - 0.3125rem);
     margin-inline-end: 0.5rem;
     font-size: 0.75rem;
-    width: 120px; /* Зменшуємо ширину кнопки */
+    width: 120px;
   }
 }
 
-/* ── Small mobile (< 375px) ── */
+/* Small mobile (<375px) */
 @media (max-width: 374px) {
   :root {
     --container-pad: .875rem;
@@ -164,7 +155,7 @@ button,
   }
 }
 
-/* ── Landscape on small phones ── */
+/* Landscape small phones */
 @media (max-height: 480px) and (orientation: landscape) {
   .hero__inner {
     padding-block: 3rem 2rem;
@@ -175,7 +166,7 @@ button,
   }
 }
 
-/* ── Focus-visible outlines for keyboard nav ── */
+/* Focus-visible outlines */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -185,14 +176,14 @@ input:focus-visible,
   border-radius: var(--radius-sm);
 }
 
-/* ── Reduced motion preference ── */
+/* Reduced motion — accessibility exception for !important */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
+    transition-duration: .01ms;
+    scroll-behavior: auto;
   }
 }

@@ -13,6 +13,7 @@
 }
 
 .contact__info-title {
+  font-family: var(--font-heading);
   font-size: clamp(1.375rem, 3vw, 2rem);
   font-weight: 700;
   color: #fff;
@@ -22,7 +23,7 @@
 
 .contact__info-desc {
   font-size: var(--size-base);
-  color: rgba(255,255,255,.7);
+  color: var(--color-text-muted);
   line-height: 1.7;
   margin-bottom: 2rem;
 }
@@ -44,7 +45,7 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background: rgba(197,162,103,.15);
+  background: rgba(229, 9, 20, .12);
   color: var(--color-accent);
   display: flex;
   align-items: center;
@@ -56,7 +57,7 @@
 
 .contact__detail-label {
   font-size: var(--size-xs);
-  color: rgba(255,255,255,.5);
+  color: var(--color-text-light);
   text-transform: uppercase;
   letter-spacing: .08em;
   margin-bottom: .125rem;
@@ -84,27 +85,30 @@
   gap: .5rem;
   padding: .5rem 1rem;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.06);
   color: rgba(255,255,255,.8);
   font-size: var(--size-sm);
   font-weight: 600;
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
   -webkit-tap-highlight-color: transparent;
+  border: 1px solid var(--color-border);
 }
 
 .contact__messenger-btn:hover {
-  background: rgba(255,255,255,.15);
+  background: rgba(229, 9, 20, .1);
+  border-color: rgba(229, 9, 20, .3);
 }
 
 /* Contact Form */
 .contact__form-wrap {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 2rem;
 }
 
 .contact__form-title {
+  font-family: var(--font-heading);
   font-size: var(--size-xl);
   font-weight: 700;
   color: #fff;
@@ -128,15 +132,15 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .08em;
-  color: rgba(255,255,255,.6);
+  color: var(--color-text-light);
 }
 
 .form__input {
   width: 100%;
   padding: .875rem 1rem;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--color-border);
   color: #fff;
   font-size: var(--size-base);
   transition: border-color var(--transition), background var(--transition);
@@ -145,37 +149,14 @@
 }
 
 .form__input::placeholder {
-  color: rgba(255,255,255,.35);
+  color: var(--color-text-light);
 }
 
 .form__input:focus {
   border-color: var(--color-accent);
-  background: rgba(255,255,255,.14);
+  background: rgba(229, 9, 20, .05);
   outline: none;
-}
-
-.form__radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-.form__radio {
-  display: flex;
-  align-items: center;
-  gap: .625rem;
-  cursor: pointer;
-  font-size: var(--size-sm);
-  color: rgba(255,255,255,.8);
-  -webkit-tap-highlight-color: transparent;
-}
-
-.form__radio input[type="radio"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--color-accent);
-  flex-shrink: 0;
-  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, .12);
 }
 
 .form__submit {
@@ -185,10 +166,28 @@
 
 .form__privacy {
   font-size: var(--size-xs);
-  color: rgba(255,255,255,.4);
+  color: var(--color-text-light);
   text-align: center;
   line-height: 1.5;
   margin-top: .25rem;
+}
+
+/* Honeypot — visually hidden, not accessible to real users */
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+  tab-index: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+  line-height: 1.5;
 }
 
 /* HTMX success state */
@@ -202,7 +201,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(197,162,103,.2);
+  background: rgba(229, 9, 20, .15);
   color: var(--color-accent);
   display: flex;
   align-items: center;
@@ -211,6 +210,7 @@
 }
 
 .form__success-title {
+  font-family: var(--font-heading);
   font-size: var(--size-xl);
   font-weight: 700;
   margin-bottom: .5rem;
@@ -218,7 +218,7 @@
 
 .form__success-text {
   font-size: var(--size-sm);
-  color: rgba(255,255,255,.65);
+  color: var(--color-text-muted);
 }
 
 /* ========================================
@@ -228,7 +228,7 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,8 +236,8 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 250ms ease, visibility 250ms ease;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .modal-overlay.is-open {
@@ -247,14 +247,15 @@
 
 .modal {
   position: relative;
-  background: var(--color-bg-white);
+  background: var(--color-primary);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 520px;
   max-height: 90dvh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, .6);
   transform: translateY(24px) scale(0.97);
   transition: transform 250ms ease;
   padding: 2rem;
@@ -273,9 +274,10 @@
 }
 
 .modal__title {
+  font-family: var(--font-heading);
   font-size: var(--size-xl);
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-text);
   line-height: 1.3;
 }
 
@@ -284,8 +286,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--color-bg);
-  border: none;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--color-border);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -298,17 +300,16 @@
 }
 
 .modal__close:hover {
-  background: var(--color-border);
-  color: var(--color-text);
+  background: rgba(229, 9, 20, .15);
+  color: var(--color-accent);
 }
 
-/* Form overrides for light modal background */
 .modal .form__label {
-  color: var(--color-text-muted);
+  color: var(--color-text-light);
 }
 
 .modal .form__input {
-  background: var(--color-bg);
+  background: rgba(255,255,255,.06);
   border-color: var(--color-border);
   color: var(--color-text);
 }
@@ -318,13 +319,9 @@
 }
 
 .modal .form__input:focus {
-  background: var(--color-bg-white);
+  background: rgba(229, 9, 20, .05);
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(197, 162, 103, 0.15);
-}
-
-.modal .form__radio {
-  color: var(--color-text-muted);
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, .12);
 }
 
 .modal .form__privacy {

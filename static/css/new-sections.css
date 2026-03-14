@@ -1,8 +1,8 @@
 /* ========================================
-   FAQ Section  (details / summary)
+   FAQ Section (details / summary)
    ======================================== */
 .faq {
-  background: var(--color-bg-white);
+  background: var(--color-primary);
 }
 
 .faq .section-title {
@@ -19,16 +19,15 @@
 .faq__item {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-bg-white);
+  background: var(--color-bg-card);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .faq__item[open] {
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 16px rgba(229, 9, 20, .1);
 }
 
-/* Remove browser-default marker on summary */
 .faq__question {
   list-style: none;
   display: flex;
@@ -36,9 +35,10 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
+  font-family: var(--font-heading);
   font-size: var(--size-base);
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-text);
   cursor: pointer;
   line-height: 1.4;
   -webkit-tap-highlight-color: transparent;
@@ -67,7 +67,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(197, 162, 103, .12);
+  background: rgba(229, 9, 20, .12);
   position: relative;
   transition: background var(--transition), transform var(--transition);
 }
@@ -96,7 +96,7 @@
 }
 
 .faq__item[open] .faq__icon {
-  background: rgba(197, 162, 103, .25);
+  background: rgba(229, 9, 20, .25);
 }
 
 .faq__item[open] .faq__icon::after {
@@ -115,7 +115,6 @@
   margin-top: .75rem;
 }
 
-/* Responsive — Mobile (< 768px) */
 @media (max-width: 767px) {
   .faq__question {
     padding: 1rem 1.25rem;

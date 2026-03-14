@@ -1,26 +1,24 @@
+{% load static i18n %}
 <!doctype html>
-<html lang="uk">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1E4332">
-  <title>{% block title %}Назва вашого сайту{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Опис вашого сайту та основні послуги.{% endblock %}">
-  
-  {% load static %}
+  <meta name="theme-color" content="#1a1a2e">
+  <title>{% block title %}DISTAGE — {% trans "Профессиональный чип-тюнинг" %}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{% trans "Чип-тюнинг, удаление DPF, EGR, AdBlue, калибровка ЭБУ. Качественные прошивки для легкового и коммерческого транспорта." %}{% endblock %}">
+
   <link rel="icon" type="image/webp" href="{% static 'images/logo.webp' %}">
   <link rel="apple-touch-icon" href="{% static 'images/logo.webp' %}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="preload" as="style" href="{% static 'css/base.css' %}">
   <link rel="preload" as="style" href="{% static 'css/layout.css' %}">
   <link rel="preload" as="style" href="{% static 'css/hero.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/sections.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/services.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/stats.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/contact.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/mobile.css' %}">
-  <link rel="preload" as="style" href="{% static 'css/new-sections.css' %}">
-  
+
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="{% static 'css/layout.css' %}">
   <link rel="stylesheet" href="{% static 'css/hero.css' %}">
@@ -35,8 +33,6 @@
   <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 <body>
-
 {% block body %}{% endblock %}
-
 </body>
 </html>
