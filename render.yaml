@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: starter
     buildCommand: ./build.sh
-    preDeployCommand: python manage.py migrate --no-input
+    preDeployCommand: python manage.py migrate --no-input && python manage.py seed
     startCommand: ./start.sh
     healthCheckPath: /healthz
     envVars:
