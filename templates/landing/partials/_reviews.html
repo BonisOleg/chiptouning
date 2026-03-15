@@ -7,18 +7,30 @@
       <h2 class="section-title js-reveal">{% trans "Что о нас говорят клиенты" %}</h2>
     </div>
 
-    <div class="reviews__grid">
-      {% for review in reviews %}
-        <div class="review-card js-reveal">
-          <div class="review-card__header">
-            <span class="review-card__author">{{ review.author }}</span>
-            {% if review.car %}
-              <span class="review-card__car">{{ review.car }}</span>
-            {% endif %}
+    <div class="reviews__carousel js-reviews-carousel">
+      <div class="reviews__track">
+        {% for review in reviews %}
+          <div class="review-card">
+            <div class="review-card__header">
+              <span class="review-card__author">{{ review.author }}</span>
+              {% if review.car %}
+                <span class="review-card__car">{{ review.car }}</span>
+              {% endif %}
+            </div>
+            <p class="review-card__text">{{ review.text }}</p>
           </div>
-          <p class="review-card__text">{{ review.text }}</p>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
+
+      <div class="reviews__controls">
+        <button class="reviews__btn reviews__btn--prev" aria-label="{% trans 'Назад' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="reviews__dots"></div>
+        <button class="reviews__btn reviews__btn--next" aria-label="{% trans 'Вперёд' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>

@@ -172,4 +172,79 @@
     }
   });
 
+  /* ── Reviews Carousel ── */
+  var carousel = document.querySelector('.js-reviews-carousel');
+  if (carousel) {
+    var track = carousel.querySelector('.reviews__track');
+    var dotsContainer = carousel.querySelector('.reviews__dots');
+    var prevBtn = carousel.querySelector('.reviews__btn--prev');
+    var nextBtn = carousel.querySelector('.reviews__btn--next');
+    var cards = Array.from(track.querySelectorAll('.review-card'));
+    var current = 0;
+
+    function getVisible() {
+      var w = carousel.offsetWidth;
+      if (w >= 1024) return 3;
+      if (w >= 640) return 2;
+      return 1;
+    }
+
+    function totalSlides() {
+      return Math.max(1, cards.length - getVisible() + 1);
+    }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      var n = totalSlides();
+      for (var i = 0; i < n; i++) {
+        var dot = document.createElement('button');
+        dot.className = 'reviews__dot' + (i === current ? ' active' : '');
+        dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+        (function (idx) {
+          dot.addEventListener('click', function () { goTo(idx); });
+        }(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goTo(idx) {
+      var n = totalSlides();
+      current = Math.max(0, Math.min(idx, n - 1));
+      var cardW = cards[0].offsetWidth + 24; // 1.5rem gap = 24px
+      track.style.transform = 'translateX(' + (-current * cardW) + 'px)';
+      Array.from(dotsContainer.querySelectorAll('.reviews__dot')).forEach(function (d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function next() { goTo(current + 1 < totalSlides() ? current + 1 : 0); }
+    function prev() { goTo(current - 1 >= 0 ? current - 1 : totalSlides() - 1); }
+
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+
+    /* Touch/swipe */
+    var touchStartX = 0;
+    var touchEndX = 0;
+    carousel.addEventListener('touchstart', function (e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].clientX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) { diff > 0 ? next() : prev(); }
+    });
+
+    /* Rebuild on resize */
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        buildDots();
+        goTo(0);
+      }, 150);
+    });
+
+    buildDots();
+    goTo(0);
+  }
+
 })();

@@ -197,16 +197,16 @@ class Command(BaseCommand):
 
     def _seed_stats(self):
         items = [
-            ('1000+', 'Обработанных файлов', 'Оброблених файлів', 0),
-            ('5+ лет', 'Опыта в индустрии', 'Досвіду в індустрії', 1),
-            ('24/7', 'Поддержка клиентов', 'Підтримка клієнтів', 2),
-            ('10–30%', 'Прирост мощности', 'Приріст потужності', 3),
+            ('1000+', '1000+', 'Обработанных файлов', 'Оброблених файлів', 0),
+            ('10 лет', '10 років', 'Опыта в индустрии', 'Досвіду в індустрії', 1),
+            ('24/7', '24/7', 'Поддержка клиентов', 'Підтримка клієнтів', 2),
+            ('10–30%', '10–30%', 'Прирост мощности', 'Приріст потужності', 3),
         ]
-        for val, label_ru, label_uk, order in items:
+        for val_ru, val_uk, label_ru, label_uk, order in items:
             StatItem.objects.update_or_create(
                 order=order,
                 defaults=dict(
-                    value_ru=val, value_uk=val,
+                    value_ru=val_ru, value_uk=val_uk,
                     label_ru=label_ru, label_uk=label_uk,
                 )
             )
