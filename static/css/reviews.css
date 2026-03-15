@@ -1,0 +1,68 @@
+/* ========================================
+   Reviews Section
+   ======================================== */
+.reviews {
+  background: var(--color-bg);
+}
+
+.reviews__title-wrap {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229, 9, 20, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.review-card__header {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.review-card__author {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-base);
+  color: var(--color-text);
+}
+
+.review-card__car {
+  font-size: var(--size-xs);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.review-card__text {
+  font-size: var(--size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+@media (max-width: 767px) {
+  .reviews__grid {
+    grid-template-columns: 1fr;
+  }
+}

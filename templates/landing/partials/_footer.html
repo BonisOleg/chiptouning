@@ -3,11 +3,11 @@
 <footer class="footer">
   <div class="footer__inner">
     <div class="footer__brand">
-      <a href="{% url 'landing:index' %}" aria-label="DISTAGE">
+      <a href="{% url 'landing:index' %}" aria-label="DISTAGEavto">
         {% if site.logo %}
-          <img src="{{ site.logo.url }}" alt="DISTAGE" class="footer__logo-img" width="140" height="70">
+          <img src="{{ site.logo.url }}" alt="DISTAGEavto" class="footer__logo-img" width="140" height="70">
         {% else %}
-          <span class="header__logo-text">DI<span>STAGE</span></span>
+          <span class="header__logo-text">DI<span>STAGEavto</span></span>
         {% endif %}
       </a>
       <p class="footer__logo-text">
@@ -21,6 +21,7 @@
         <li><a href="#about" class="footer__nav-link">{% trans "О нас" %}</a></li>
         <li><a href="#services" class="footer__nav-link">{% trans "Услуги" %}</a></li>
         <li><a href="#steps" class="footer__nav-link">{% trans "Как работаем" %}</a></li>
+        <li><a href="#reviews" class="footer__nav-link">{% trans "Отзывы" %}</a></li>
         <li><a href="#contact" class="footer__nav-link">{% trans "Контакты" %}</a></li>
         <li><a href="#faq" class="footer__nav-link">FAQ</a></li>
       </ul>
@@ -29,7 +30,7 @@
 
   <div class="footer__bottom">
     <div class="footer__copyright">
-      <p class="footer__copyright-text">&copy; {% now "Y" %} DISTAGE. {% trans "Все права защищены." %}</p>
+      <p class="footer__copyright-text">&copy; {% now "Y" %} DISTAGEavto. {% trans "Все права защищены." %}</p>
     </div>
 
     <div class="footer__social">

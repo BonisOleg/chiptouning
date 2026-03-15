@@ -6,11 +6,11 @@
       <span></span><span></span><span></span>
     </button>
 
-    <a href="{% url 'landing:index' %}" class="header__logo" aria-label="DISTAGE">
+    <a href="{% url 'landing:index' %}" class="header__logo" aria-label="DISTAGEavto">
       {% if site.logo %}
-        <img src="{{ site.logo.url }}" alt="DISTAGE" class="header__logo-img" width="160" height="56">
+        <img src="{{ site.logo.url }}" alt="DISTAGEavto" class="header__logo-img" width="160" height="56">
       {% else %}
-        <span class="header__logo-text">DI<span>STAGE</span></span>
+        <span class="header__logo-text">DI<span>STAGEavto</span></span>
       {% endif %}
     </a>
 
@@ -20,6 +20,7 @@
         <li><a href="#services" class="nav__link" data-close-nav>{% trans "Услуги" %}</a></li>
         <li><a href="#steps" class="nav__link" data-close-nav>{% trans "Как работаем" %}</a></li>
         <li><a href="#advantages" class="nav__link" data-close-nav>{% trans "Преимущества" %}</a></li>
+        <li><a href="#reviews" class="nav__link" data-close-nav>{% trans "Отзывы" %}</a></li>
         <li><a href="#contact" class="nav__link" data-close-nav>{% trans "Контакты" %}</a></li>
         <li><a href="#faq" class="nav__link" data-close-nav>FAQ</a></li>
       </ul>
@@ -50,6 +51,7 @@
     <li><a href="#services" class="nav__link" data-close-nav>{% trans "Услуги" %}</a></li>
     <li><a href="#steps" class="nav__link" data-close-nav>{% trans "Как работаем" %}</a></li>
     <li><a href="#advantages" class="nav__link" data-close-nav>{% trans "Преимущества" %}</a></li>
+    <li><a href="#reviews" class="nav__link" data-close-nav>{% trans "Отзывы" %}</a></li>
     <li><a href="#contact" class="nav__link" data-close-nav>{% trans "Контакты" %}</a></li>
     <li><a href="#faq" class="nav__link" data-close-nav>FAQ</a></li>
   </ul>

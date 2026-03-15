@@ -192,3 +192,18 @@ class LeadSubmission(models.Model):
 
     def __str__(self) -> str:
         return f'{self.name} ({self.phone})'
+
+
+class ReviewItem(models.Model):
+    author = models.CharField(max_length=80, verbose_name='Автор')
+    car = models.CharField(max_length=80, blank=True, verbose_name='Авто')
+    text = models.TextField(verbose_name='Текст відгуку')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Відгук'
+        verbose_name_plural = 'Відгуки'
+
+    def __str__(self) -> str:
+        return f'Відгук від {self.author}'

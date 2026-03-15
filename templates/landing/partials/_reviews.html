@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <div class="reviews__title-wrap">
+      <span class="section-label js-reveal">{% trans "Отзывы" %}</span>
+      <h2 class="section-title js-reveal">{% trans "Что о нас говорят клиенты" %}</h2>
+    </div>
+
+    <div class="reviews__grid">
+      {% for review in reviews %}
+        <div class="review-card js-reveal">
+          <div class="review-card__header">
+            <span class="review-card__author">{{ review.author }}</span>
+            {% if review.car %}
+              <span class="review-card__car">{{ review.car }}</span>
+            {% endif %}
+          </div>
+          <p class="review-card__text">{{ review.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

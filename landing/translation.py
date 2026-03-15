@@ -2,7 +2,7 @@ from modeltranslation.translator import register, TranslationOptions
 from .models1 import SiteSettings, HeroSection, AboutSection, ServiceItem
 from .models2 import (
     WorkStep, StatItem, AdvantageItem, AdvantagesSection,
-    ServicesSection, ContactSection, FAQSection, FAQItem,
+    ServicesSection, ContactSection, FAQSection, FAQItem, ReviewItem,
 )
 
 
@@ -64,3 +64,8 @@ class FAQSectionTO(TranslationOptions):
 @register(FAQItem)
 class FAQItemTO(TranslationOptions):
     fields = ('question', 'answer')
+
+
+@register(ReviewItem)
+class ReviewItemTO(TranslationOptions):
+    fields = ('text',)
