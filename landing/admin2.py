@@ -2,7 +2,7 @@ from django.contrib import admin
 from .admin1 import SingletonAdmin
 from .models2 import (
     WorkStep, StatItem, AdvantageItem, AdvantagesSection,
-    ServicesSection, ContactSection, FAQSection, FAQItem, LeadSubmission,
+    ServicesSection, ContactSection, FAQSection, FAQItem, LeadSubmission, ReviewItem, PartnerItem,
 )
 
 
@@ -80,3 +80,17 @@ class LeadSubmissionAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+
+@admin.register(ReviewItem)
+class ReviewItemAdmin(admin.ModelAdmin):
+    list_display = ('author', 'car', 'order')
+    list_editable = ('order',)
+    ordering = ('order',)
+
+
+@admin.register(PartnerItem)
+class PartnerItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    list_editable = ('order',)
+    ordering = ('order',)

@@ -1,0 +1,34 @@
+{% load i18n %}
+
+{% if partners %}
+<section class="section partners" id="partners">
+  <div class="container">
+    <div class="partners__title-wrap">
+      <span class="section-label js-reveal">{% trans "Партнери" %}</span>
+      <h2 class="section-title js-reveal">{% trans "З нами працюють" %}</h2>
+    </div>
+
+    <div class="partners__grid">
+      {% for partner in partners %}
+        <div class="partner-card js-reveal">
+          {% if partner.url %}
+            <a href="{{ partner.url }}" target="_blank" rel="noopener" class="partner-card__link">
+          {% endif %}
+            <div class="partner-card__logo">
+              {% if partner.logo %}
+                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" loading="lazy">
+              {% else %}
+                <span class="partner-card__name">{{ partner.name }}</span>
+              {% endif %}
+            </div>
+          {% if partner.url %}</a>{% endif %}
+          
+          {% if partner.description %}
+            <p class="partner-card__desc">{{ partner.description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

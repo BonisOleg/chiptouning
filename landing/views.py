@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from .models1 import SiteSettings, HeroSection, AboutSection, ServiceItem
 from .models2 import (
     WorkStep, StatItem, AdvantageItem, AdvantagesSection,
-    ServicesSection, ContactSection, FAQSection, FAQItem, LeadSubmission, ReviewItem,
+    ServicesSection, ContactSection, FAQSection, FAQItem, LeadSubmission, ReviewItem, PartnerItem,
 )
 
 _PHONE_RE = re.compile(r'^\+?[\d\s\-\(\)]{7,20}$')
@@ -31,6 +31,7 @@ def _get_context() -> dict:
         'advantages_section': AdvantagesSection.load(),
         'advantages': AdvantageItem.objects.all(),
         'reviews': ReviewItem.objects.all(),
+        'partners': PartnerItem.objects.all(),
         'contact': ContactSection.load(),
         'faq_section': FAQSection.load(),
         'faq_items': FAQItem.objects.all(),

@@ -207,3 +207,19 @@ class ReviewItem(models.Model):
 
     def __str__(self) -> str:
         return f'Відгук від {self.author}'
+
+
+class PartnerItem(models.Model):
+    name = models.CharField(max_length=120, verbose_name='Назва')
+    logo = models.ImageField(upload_to='partners/', verbose_name='Логотип')
+    description = models.TextField(blank=True, verbose_name='Опис')
+    url = models.URLField(blank=True, verbose_name='Посилання')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Партнер'
+        verbose_name_plural = 'Партнери'
+
+    def __str__(self) -> str:
+        return self.name

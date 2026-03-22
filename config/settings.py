@@ -21,6 +21,7 @@ ALLOWED_HOSTS = [
     'localhost', '127.0.0.1',
     '.onrender.com',
     '.distage.com', 'www.distage.com',
+    '.distageavto.com', 'www.distageavto.com',
 ]
 render_external_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if render_external_hostname:
@@ -29,6 +30,8 @@ if render_external_hostname:
 CSRF_TRUSTED_ORIGINS = [
     'https://*.onrender.com',
     'https://*.distage.com',
+    'https://*.distageavto.com',
+    'https://www.distageavto.com',
 ]
 if render_external_hostname:
     CSRF_TRUSTED_ORIGINS.append(f'https://{render_external_hostname}')
