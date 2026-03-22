@@ -15,6 +15,8 @@ from .models2 import (
     FAQSection,
     FAQItem,
     LeadSubmission,
+    ReviewItem,
+    PartnerItem,
 )
 
 __all__ = [
@@ -32,4 +34,6 @@ __all__ = [
     'FAQSection',
     'FAQItem',
     'LeadSubmission',
+    'ReviewItem',
+    'PartnerItem',
 ]
