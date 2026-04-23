@@ -211,7 +211,7 @@ class ReviewItem(models.Model):
 
 class PartnerItem(models.Model):
     name = models.CharField(max_length=120, verbose_name='Назва')
-    logo = models.ImageField(upload_to='partners/', verbose_name='Логотип')
+    logo = models.ImageField(upload_to='partners/', verbose_name='Логотип', blank=True)
     description = models.TextField(blank=True, verbose_name='Опис')
     url = models.URLField(blank=True, verbose_name='Посилання')
     order = models.PositiveSmallIntegerField(default=0, verbose_name='Порядок')

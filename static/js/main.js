@@ -248,3 +248,26 @@
   }
 
 })();
+
+/* ── Partner cards: "Show more" clamp toggle ── */
+(function () {
+  'use strict';
+
+  var cards = document.querySelectorAll('.partner-card__desc[data-clamp]');
+
+  cards.forEach(function (desc) {
+    var btn = desc.parentElement.querySelector('[data-toggle-clamp]');
+    if (!btn) return;
+
+    if (desc.scrollHeight - desc.clientHeight > 4) {
+      btn.hidden = false;
+      btn.dataset.moreLabel = btn.dataset.moreLabel || btn.textContent.trim();
+      btn.dataset.lessLabel = btn.dataset.lessLabel || desc.dataset.lessLabel || btn.textContent.trim();
+    }
+
+    btn.addEventListener('click', function () {
+      var expanded = desc.classList.toggle('is-expanded');
+      btn.textContent = expanded ? btn.dataset.lessLabel : btn.dataset.moreLabel;
+    });
+  });
+})();
