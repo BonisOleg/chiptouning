@@ -18,21 +18,39 @@ class Command(BaseCommand):
         parser.add_argument(
             '--skip-if-populated',
             action='store_true',
-            help='Нічого не робити, якщо послуги вже є в БД',
+            help='Нічого не робити, якщо основний контент уже є в БД',
+        )
+
+    @staticmethod
+    def _is_content_ready() -> bool:
+        return (
+            ServiceItem.objects.filter(category='removal').count() >= 6
+            and ServiceItem.objects.filter(category='tuning').count() >= 3
+            and WorkStep.objects.count() >= 5
+            and FAQItem.objects.count() >= 6
         )
 
     def handle(self, *args, **options):
-        if options['skip_if_populated'] and ServiceItem.objects.exists():
+        ready = self._is_content_ready()
+
+        if options['skip_if_populated'] and ready:
             self.stdout.write('Seed skipped: content already exists (use --force to overwrite)')
             return
 
-        if not options['force'] and ServiceItem.objects.exists():
+        if not options['force'] and ready:
             self.stdout.write(
                 self.style.WARNING(
                     'Content exists. Use --force to overwrite or --skip-if-populated to skip silently.'
                 )
             )
             return
+
+        if ServiceItem.objects.exists() and not ready:
+            self.stdout.write(
+                self.style.WARNING(
+                    'Partial or invalid content detected — re-seeding missing sections.'
+                )
+            )
 
         self._seed_site()
         self._seed_hero()

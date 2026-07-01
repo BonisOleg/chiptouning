@@ -147,6 +147,11 @@ textarea {
   transform: none;
 }
 
+html.no-js .js-reveal {
+  opacity: 1;
+  transform: none;
+}
+
 /* ========================================
    Buttons
    ======================================== */

@@ -1,6 +1,6 @@
 {% load static i18n %}
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
   <link rel="stylesheet" href="{% static 'css/new-sections.css' %}">
 
+  <script>document.documentElement.classList.remove('no-js');</script>
   <script src="{% static 'django_htmx/htmx.min.js' %}" defer></script>
   <script src="{% static 'js/main.js' %}" defer></script>
 </head>
