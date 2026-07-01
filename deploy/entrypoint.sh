@@ -39,10 +39,19 @@ if [ "${_static_count:-0}" -lt 5 ]; then
   echo "WARN: staticfiles count low — check STATIC_ROOT and collectstatic"
 fi
 
-if [ "${SEED_ON_START:-0}" = "1" ]; then
-  echo "==> Running seed..."
-  python manage.py seed
-fi
+case "${SEED_ON_START:-auto}" in
+  0|false|no)
+    echo "==> Seed disabled (SEED_ON_START=0)"
+    ;;
+  1|true|yes|force)
+    echo "==> Running seed (force)..."
+    python manage.py seed --force
+    ;;
+  auto|*)
+    echo "==> Running seed if database is empty..."
+    python manage.py seed --skip-if-populated
+    ;;
+esac
 
 echo "==> Starting: $*"
 exec "$@"

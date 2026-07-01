@@ -4,6 +4,16 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
+if [[ ! -f .env ]]; then
+  echo "ERROR: .env not found. Copy .env.docker.example to .env and fill secrets."
+  exit 1
+fi
+
+set -a
+# shellcheck disable=SC1091
+source .env
+set +a
+
 COMPOSE=(docker compose -f docker-compose.yml)
 if [[ -f docker-compose.prod.yml ]] && [[ "${USE_PROD_COMPOSE:-0}" = "1" ]]; then
   COMPOSE+=( -f docker-compose.prod.yml )
@@ -23,11 +33,6 @@ free_host_ports() {
 echo "==> Freeing host ports 80/443 (if occupied by systemd services)"
 free_host_ports
 
-if [[ ! -f .env ]]; then
-  echo "ERROR: .env not found. Copy .env.docker.example to .env and fill secrets."
-  exit 1
-fi
-
 echo "==> Building web image"
 "${COMPOSE[@]}" build web
 
@@ -35,15 +40,30 @@ echo "==> Starting services"
 "${COMPOSE[@]}" up -d
 
 echo "==> Waiting for healthcheck..."
-for _ in $(seq 1 30); do
+healthy=0
+for _ in $(seq 1 40); do
   if curl -sf "http://127.0.0.1:${HTTP_PORT:-80}/healthz" >/dev/null 2>&1; then
     echo "==> Healthcheck OK"
-    "${COMPOSE[@]}" ps
-    exit 0
+    healthy=1
+    break
   fi
   sleep 3
 done
 
-echo "ERROR: healthcheck failed"
-"${COMPOSE[@]}" logs --tail=50 web nginx
-exit 1
+if [[ "$healthy" -ne 1 ]]; then
+  echo "ERROR: healthcheck failed"
+  "${COMPOSE[@]}" logs --tail=50 web nginx
+  exit 1
+fi
+
+echo "==> Ensuring database content (seed if empty)..."
+if [[ "${SEED_ON_START:-auto}" = "0" ]]; then
+  echo "==> Seed skipped (SEED_ON_START=0)"
+elif [[ "${SEED_ON_START:-auto}" = "1" ]]; then
+  "${COMPOSE[@]}" exec -T web python manage.py seed --force
+else
+  "${COMPOSE[@]}" exec -T web python manage.py seed --skip-if-populated
+fi
+
+echo "==> Deploy complete"
+"${COMPOSE[@]}" ps

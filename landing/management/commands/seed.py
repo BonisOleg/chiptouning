@@ -9,7 +9,31 @@ from landing.models2 import (
 class Command(BaseCommand):
     help = 'Seed database with DISTAGE chip-tuning landing page content'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--force',
+            action='store_true',
+            help='Перезаписати контент навіть якщо БД уже заповнена',
+        )
+        parser.add_argument(
+            '--skip-if-populated',
+            action='store_true',
+            help='Нічого не робити, якщо послуги вже є в БД',
+        )
+
     def handle(self, *args, **options):
+        if options['skip_if_populated'] and ServiceItem.objects.exists():
+            self.stdout.write('Seed skipped: content already exists (use --force to overwrite)')
+            return
+
+        if not options['force'] and ServiceItem.objects.exists():
+            self.stdout.write(
+                self.style.WARNING(
+                    'Content exists. Use --force to overwrite or --skip-if-populated to skip silently.'
+                )
+            )
+            return
+
         self._seed_site()
         self._seed_hero()
         self._seed_about()
